@@ -22,7 +22,26 @@ namespace WpfApp5
         public MyDocumentViewer()
         {
             InitializeComponent();
-            MessageBox.Show("建立視窗成功");
+        }
+        private void New_Excuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            MyDocumentViewer myDocumentViewer = new MyDocumentViewer();
+            myDocumentViewer.Show();
+        }
+        private void Open_Excuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Open");
+        }
+        private void Save_Excuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Save");
+        }
+
+        private void rtbEditor_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            object property = rtbEditor.Selection.GetPropertyValue(Inline.FontWeightProperty);
+            boldButton.IsChecked = (property != DependencyProperty.UnsetValue) && property.Equals(FontWeights.Bold);//如果屬性沒有設值和是否粗體
+
         }
     }
 }

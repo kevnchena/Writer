@@ -6,16 +6,21 @@
         xmlns:local="clr-namespace:WpfApp5"
         mc:Ignorable="d"
         Title="MyDocumentViewer" Height="450" Width="800">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New" Executed="New_Excuted"/>
+        <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Excuted"/>
+        <CommandBinding Command="ApplicationCommands.Save" Executed="Save_Excuted"/>
+    </Window.CommandBindings>
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" Height="40" Width="500" VerticalAlignment="Top" HorizontalAlignment="Left">
             <ToolBar x:Name="applicationToolBar" Height="40" Width="200">
-                <Button x:Name="newButton" Width="40" Height="40">
+                <Button x:Name="newButton" Command="ApplicationCommands.New"  Width="40" Height="40">
                     <Image Height="35" Width="35" Source="/new.png"/>
                 </Button>
-                <Button x:Name="openButton" Width="40" Height="40">
+                <Button x:Name="openButton" Command="ApplicationCommands.Open" Width="40" Height="40">
                     <Image Height="35" Width="35" Source="/open.png"/>
                 </Button>
-                <Button x:Name="saveButton" Width="40" Height="40">
+                <Button x:Name="saveButton" Command="ApplicationCommands.Save" Width="40" Height="40">
                     <Image Height="35" Width="35" Source="/save.png"/>
                 </Button>
                 <Button x:Name="clearButton" Width="40" Height="40">
@@ -23,18 +28,18 @@
                 </Button>
             </ToolBar>
             <ToolBar x:Name="editingToolBar" Height="40" Width="400">
-                <ToggleButton x:Name="boldButton" Width="40" Height="40">
+                <ToggleButton x:Name="boldButton" Command="EditingCommands.ToggleBold"  Width="40" Height="40">
                     <Image Height="35" Width="35" Source="/bold.png"/>
                 </ToggleButton>
-                <ToggleButton x:Name="italicButton" Width="40" Height="40">
+                <ToggleButton x:Name="italicButton" Command="EditingCommands.ToggleItalic" Width="40" Height="40">
                     <Image Height="35" Width="35" Source="/italic.png"/>
                 </ToggleButton>
-                <ToggleButton x:Name="underlineButton" Width="40" Height="40">
+                <ToggleButton x:Name="underlineButton" Command="EditingCommands.ToggleUnderline" Width="40" Height="40">
                     <Image Height="35" Width="35" Source="/underline.png"/>
                 </ToggleButton>
             </ToolBar>
         </ToolBarTray>
-        <RichTextBox x:Name="rtbEditor" Background="#FFFDF9EC"/>
+        <RichTextBox x:Name="rtbEditor" Background="#FFFDF9EC" SelectionChanged="rtbEditor_SelectionChanged"/>
         <FlowDocumentReader/>
     </DockPanel>
 </Window>
