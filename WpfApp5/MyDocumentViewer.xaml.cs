@@ -10,25 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace WpfApp5
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// MyDocumentViewer.xaml 的互動邏輯
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MyDocumentViewer : Window
     {
-        public MainWindow()
+        public MyDocumentViewer()
         {
             InitializeComponent();
-        }
-
-        private void openButton_Click(object sender, RoutedEventArgs e)
-        {
-            MyDocumentViewer myDocumentViewer = new MyDocumentViewer();
-            myDocumentViewer.Show();
+            MessageBox.Show("建立視窗成功");
         }
     }
 }
