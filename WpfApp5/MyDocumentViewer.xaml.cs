@@ -50,27 +50,30 @@ namespace WpfApp5
 
         private void rtbEditor_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            object property = rtbEditor.Selection.GetPropertyValue(Inline.FontWeightProperty);
-            boldButton.IsChecked = (property != DependencyProperty.UnsetValue) && property.Equals(FontWeights.Bold);//如果屬性沒有設值和是否粗體
-            
-            property = rtbEditor.Selection.GetPropertyValue(Inline.FontStyleProperty);
-            italicButton.IsChecked = (property != DependencyProperty.UnsetValue) && property.Equals(FontStyles.Italic);
+            if (!rtbEditor.Selection.IsEmpty)
+            {
+                object property = rtbEditor.Selection.GetPropertyValue(TextElement.FontWeightProperty);
+                boldButton.IsChecked = (property != DependencyProperty.UnsetValue) && (property.Equals(FontWeights.Bold));
 
-            property = rtbEditor.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
-            underlineButton.IsChecked = (property != DependencyProperty.UnsetValue) && property.Equals(TextDecorations.Underline);
+                property = rtbEditor.Selection.GetPropertyValue(TextElement.FontStyleProperty);
+                italicButton.IsChecked = (property != DependencyProperty.UnsetValue) && (property.Equals(FontStyles.Italic));
 
-            //property = rtbEditor.Selection.GetPropertyValue(TextElement.FontFamilyProperty);
-            //if (property != DependencyProperty.UnsetValue && fontFamilyComboBox.Items.Contains(property.ToString()))
-            //{
-            //    fontFamilyComboBox.SelectedItem = property.ToString();
-            //}
+                property = rtbEditor.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
+                underlineButton.IsChecked = (property != DependencyProperty.UnsetValue) && (property.Equals(TextDecorations.Underline));
 
-            //property = rtbEditor.Selection.GetPropertyValue(TextElement.FontSizeProperty);
-            //if (property != DependencyProperty.UnsetValue)
-            //{
-            //    double fontSize = (double)property;
-            //    fontSizeComboBox.SelectedItem = fontSize;
-            //}
+                property = rtbEditor.Selection.GetPropertyValue(TextElement.FontFamilyProperty);
+                if (property != DependencyProperty.UnsetValue && fontFamilyComboBox.Items.Contains(property.ToString()))
+                {
+                    fontFamilyComboBox.SelectedItem = property.ToString();
+                }
+
+                property = rtbEditor.Selection.GetPropertyValue(TextElement.FontSizeProperty);
+                if (property != DependencyProperty.UnsetValue)
+                {
+                    double fontSize = (double)property;
+                    fontSizeComboBox.SelectedItem = fontSize;
+                }
+            }
         }
 
         private void fontSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
