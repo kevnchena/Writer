@@ -39,12 +39,16 @@ namespace WpfApp5
 
         private void rtbEditor_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            object property = rtbEditor.Selection.GetPropertyValue(Inline.FontWeightProperty);
-            object styleProperty = rtbEditor.Selection.GetPropertyValue(Inline.FontStyleProperty);
-
+            object property = rtbEditor.Selection.GetPropertyValue(TextElement.FontWeightProperty);
             boldButton.IsChecked = (property != DependencyProperty.UnsetValue) && property.Equals(FontWeights.Bold);//如果屬性沒有設值和是否粗體
-            italicButton.IsChecked = (styleProperty != DependencyProperty.UnsetValue) && styleProperty.Equals(FontStyles.Italic);
-         
+            
+            property = rtbEditor.Selection.GetPropertyValue(TextElement.FontStyleProperty);
+            italicButton.IsChecked = (property != DependencyProperty.UnsetValue) && property.Equals(FontStyles.Italic);
+
+            property = rtbEditor.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
+            underlineButton.IsChecked = (property != DependencyProperty.UnsetValue) && property.Equals(TextDecorations.Underline);
+
+
         }
     }
 }
