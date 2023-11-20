@@ -3,16 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:WpfApp5"
         mc:Ignorable="d"
-        Title="MyDocumentViewer" Height="450" Width="800">
+        Title="MyDocumentViewer" Height="486" Width="786">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="New_Excuted"/>
         <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Excuted"/>
         <CommandBinding Command="ApplicationCommands.Save" Executed="Save_Excuted"/>
     </Window.CommandBindings>
     <DockPanel>
-        <ToolBarTray DockPanel.Dock="Top" Height="40" Width="500" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <ToolBarTray DockPanel.Dock="Top" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left">
             <ToolBar x:Name="applicationToolBar" Height="40" Width="200">
                 <Button x:Name="newButton" Command="ApplicationCommands.New"  Width="40" Height="40">
                     <Image Height="35" Width="35" Source="/new.png"/>
@@ -27,7 +28,7 @@
                     <Image Height="35" Width="35" Source="/clear.png"/>
                 </Button>
             </ToolBar>
-            <ToolBar x:Name="editingToolBar" Height="40" Width="400">
+            <ToolBar x:Name="editingToolBar" Height="40" Width="500">
                 <ToggleButton x:Name="boldButton" Command="EditingCommands.ToggleBold"  Width="40" Height="40">
                     <Image Height="35" Width="35" Source="/bold.png"/>
                 </ToggleButton>
@@ -37,6 +38,10 @@
                 <ToggleButton x:Name="underlineButton" Command="EditingCommands.ToggleUnderline" Width="40" Height="40">
                     <Image Height="35" Width="35" Source="/underline.png"/>
                 </ToggleButton>
+                <xctk:ColorPicker x:Name="fontColorPicker" DisplayColorAndName="True" HorizontalAlignment="Left"
+                                  VerticalAlignment="Center" Height="40" Width="100" SelectedColorChanged="fontColorPicker_SelectedColorChanged"/>
+                <ComboBox x:Name="fontFamilyComboBox" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" SelectionChanged="fontFamilyComboBox_SelectionChanged" />
+                <ComboBox x:Name="fontSizeComboBox" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="50" SelectionChanged="fontSizeComboBox_SelectionChanged" />
             </ToolBar>
         </ToolBarTray>
         <RichTextBox x:Name="rtbEditor" Background="#FFFDF9EC" SelectionChanged="rtbEditor_SelectionChanged"/>
