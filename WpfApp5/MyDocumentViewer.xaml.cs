@@ -44,7 +44,17 @@ namespace WpfApp5
         }
         private void Open_Excuted(object sender, ExecutedRoutedEventArgs e)
         {
-            System.Windows.MessageBox.Show("Open");
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "Rich Text Format檔案|*.rtf|所有檔案|*.*";
+            if (fileDialog.ShowDialog() == true)
+            {
+                TextRange range = new TextRange(rtbEditor.Document.ContentStart, rtbEditor.Document.ContentEnd);
+
+                using (FileStream fileStream = new FileStream(fileDialog.FileName, FileMode.Open))
+                {
+                    range.Load(fileStream, DataFormats.Rtf);
+                }
+            }
         }
         private void Save_Excuted(object sender, ExecutedRoutedEventArgs e)
         {
