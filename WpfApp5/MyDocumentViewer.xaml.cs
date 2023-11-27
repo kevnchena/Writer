@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Xceed.Wpf.Toolkit;
 
 namespace WpfApp5
 {
@@ -41,11 +44,43 @@ namespace WpfApp5
         }
         private void Open_Excuted(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Open");
+            System.Windows.MessageBox.Show("Open");
         }
         private void Save_Excuted(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Save");
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Rich Text Format (*.rtf)|*.rtf|Text Files (*.txt)|*.txt",
+                DefaultExt = "rtf",
+                AddExtension = true
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string filePath = saveFileDialog.FileName;
+
+                TextRange textRange = new TextRange(rtbEditor.Document.ContentStart, rtbEditor.Document.ContentEnd);
+
+                using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                {
+                    switch (saveFileDialog.FilterIndex)
+                    {
+                        case 1: // RTF Format
+                            textRange.Save(fs, DataFormats.Rtf);
+                            break;
+                        case 2: // Text Format
+                            textRange.Save(fs, DataFormats.Text);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        private void clearButton_click(object sender, RoutedEventArgs e)
+        {
+            rtbEditor.Document.Blocks.Clear();
         }
 
         private void rtbEditor_SelectionChanged(object sender, RoutedEventArgs e)
@@ -98,5 +133,6 @@ namespace WpfApp5
             SolidColorBrush fontBrush = new SolidColorBrush(fontColor);
             rtbEditor.Selection.ApplyPropertyValue(TextElement.ForegroundProperty, fontBrush);
         }
+
     }
 }
