@@ -61,7 +61,7 @@ namespace WpfApp5
 
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
-                Filter = "Rich Text Format (*.rtf)|*.rtf|Text Files (*.txt)|*.txt",
+                Filter = "Rich Text Format (*.rtf)|*.rtf|Text Files (*.txt)|*.txt|html (*.html)|*.html",
                 DefaultExt = "rtf",
                 AddExtension = true
             };
@@ -81,6 +81,9 @@ namespace WpfApp5
                             break;
                         case 2: // Text Format
                             textRange.Save(fs, DataFormats.Text);
+                            break;
+                        case 3: // Text Format
+                            textRange.Save(fs, DataFormats.Html);
                             break;
                         default:
                             break;
