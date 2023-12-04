@@ -23,10 +23,12 @@ namespace WpfApp5
     public partial class MyDocumentViewer : Window
     {
         Color fontColor = Colors.Black;
+        Color bgColor= Colors.White;
         public MyDocumentViewer()
         {
             InitializeComponent();
             fontColorPicker.SelectedColor = fontColor;
+
             
             foreach (FontFamily fontfamily in Fonts.SystemFontFamilies)
             {
@@ -147,5 +149,11 @@ namespace WpfApp5
             rtbEditor.Selection.ApplyPropertyValue(TextElement.ForegroundProperty, fontBrush);
         }
 
+        private void backgroundColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            bgColor= (Color)e.NewValue;
+            SolidColorBrush backgroundBrush = new SolidColorBrush(bgColor);
+            rtbEditor.Background = backgroundBrush;
+        }
     }
 }
